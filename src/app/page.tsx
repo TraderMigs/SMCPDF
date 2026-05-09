@@ -1,65 +1,161 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  AlertTriangle,
+  ArrowRight,
+  BookOpen,
+  CandlestickChart,
+  Check,
+  ShieldCheck,
+} from "lucide-react";
+import { Footer } from "@/components/Footer";
+import { LeadForm } from "@/components/LeadForm";
+import { PdfPreview } from "@/components/PdfPreview";
 
-export default function Home() {
+const learnItems = [
+  "Market structure",
+  "Liquidity",
+  "Order blocks",
+  "Fair value gaps",
+  "Entries and confirmations",
+  "Risk management",
+  "How to stop chasing random candles",
+];
+
+const faqs = [
+  ["Is this financial advice?", "No. This is educational content only and does not replace licensed financial advice."],
+  ["Do I need experience?", "The free guide is beginner-friendly and written in plain English."],
+  ["Do I get instant access?", "Yes. The free guide will be sent to the email address you enter. Enter a valid email to receive any future free content as the guide is updated."],
+  ["Will this guarantee profits?", "No. There are no guaranteed results in trading. You still have to study, practice, manage risk, and make your own decisions."],
+];
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ email?: string }>;
+}) {
+  const params = await searchParams;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="relative overflow-hidden bg-background text-white">
+      <div className="premium-grid pointer-events-none absolute inset-0 opacity-80" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(215,255,97,0.13),transparent_28%),radial-gradient(circle_at_82%_12%,rgba(76,132,255,0.12),transparent_24%)]" />
+
+      <section className="relative px-5 pb-20 pt-8 sm:pt-12">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-sm font-bold tracking-wide">
+            <CandlestickChart className="h-5 w-5 text-[#d7ff61]" />
+            SMC Guide
+          </Link>
+          <Link
+            href="/disclaimer"
+            className="rounded-lg border border-white/12 px-3 py-2 text-xs font-semibold text-white/72 transition hover:text-white"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Risk disclaimer
+          </Link>
+        </nav>
+
+        <div className="mx-auto grid max-w-6xl items-center gap-10 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:pt-18">
+          <div>
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d7ff61]/25 bg-[#d7ff61]/8 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#d7ff61]">
+              Free basic Smart Money Concepts PDF
+            </div>
+            <h1 className="max-w-4xl text-4xl font-black leading-[1.02] tracking-normal text-white sm:text-5xl lg:text-6xl">
+              Learn Smart Money Concepts Without the Confusing Trader Jargon
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">
+              Get the free basic guide first. Learn the foundation in plain English before going deeper.
+            </p>
+
+            <div className="glass mt-8 rounded-xl p-4 sm:p-5">
+              <LeadForm defaultEmail={params.email || ""} />
+              <p className="mt-3 text-xs leading-5 text-white/48">
+                No signals. No income promises. Just structured education and a clear next step.
+              </p>
+            </div>
+
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href="#preview"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/14 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/8"
+              >
+                Preview the guide <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+
+          <PdfPreview />
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section id="preview" className="relative border-y border-white/10 bg-white/[0.035] px-5 py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-5 md:grid-cols-4">
+            {["Structure first", "Liquidity map", "Entry context", "Risk notes"].map((title) => (
+              <div key={title} className="glass rounded-xl p-4">
+                <div className="mb-5 h-32 overflow-hidden rounded-lg border border-white/10 bg-black/35 p-4 blur-[0.35px]">
+                  <div className="mb-4 h-3 w-24 rounded bg-[#d7ff61]/40" />
+                  <div className="space-y-2">
+                    <div className="h-2 rounded bg-white/20" />
+                    <div className="h-2 w-5/6 rounded bg-white/12" />
+                    <div className="h-2 w-2/3 rounded bg-white/12" />
+                  </div>
+                  <div className="mt-5 h-10 rounded border border-dashed border-white/15 bg-white/5" />
+                </div>
+                <p className="font-bold text-white">{title}</p>
+                <p className="mt-2 text-sm leading-6 text-white/58">
+                  A partial preview that shows the format without exposing the full paid content.
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-5 py-18">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <BookOpen className="mb-4 h-9 w-9 text-[#d7ff61]" />
+            <h2 className="text-3xl font-black sm:text-4xl">What You’ll Learn</h2>
+            <p className="mt-4 leading-7 text-white/62">
+              The goal is to make the concepts easier to organize, not to promise outcomes.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {learnItems.map((item) => (
+              <div key={item} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.045] p-4">
+                <Check className="h-5 w-5 shrink-0 text-[#d7ff61]" />
+                <span className="font-semibold">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-5 py-18">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="rounded-xl border border-amber-300/25 bg-amber-300/8 p-6">
+            <AlertTriangle className="mb-4 h-8 w-8 text-amber-200" />
+            <h2 className="text-2xl font-black">Realistic Trading Disclaimer</h2>
+            <p className="mt-4 leading-7 text-white/68">
+              This is education only. There are no guaranteed profits, no signals, no trade copying promises, and no financial advice. Trading involves substantial risk, and you are responsible for your own decisions.
+            </p>
+          </div>
+          <div>
+            <ShieldCheck className="mb-4 h-8 w-8 text-[#d7ff61]" />
+            <h2 className="text-3xl font-black">FAQ</h2>
+            <div className="mt-5 space-y-3">
+              {faqs.map(([question, answer]) => (
+                <details key={question} className="rounded-lg border border-white/10 bg-white/[0.045] p-4">
+                  <summary className="cursor-pointer font-bold">{question}</summary>
+                  <p className="mt-3 leading-7 text-white/62">{answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }
