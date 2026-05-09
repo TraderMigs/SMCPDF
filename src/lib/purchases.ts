@@ -1,5 +1,5 @@
 import type Stripe from "stripe";
-import { getStripe } from "@/lib/stripe";
+import { retrieveStripeCheckoutSession } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
 export type VerifiedPurchase = {
@@ -67,7 +67,7 @@ export async function verifyPaidPurchase(sessionId: string | null) {
     } satisfies VerifiedPurchase;
   }
 
-  const session = await getStripe().checkout.sessions.retrieve(sessionId);
+  const session = await retrieveStripeCheckoutSession(sessionId);
 
   if (session.payment_status !== "paid") {
     return null;
@@ -75,4 +75,3 @@ export async function verifyPaidPurchase(sessionId: string | null) {
 
   return recordPurchaseFromSession(session);
 }
-
