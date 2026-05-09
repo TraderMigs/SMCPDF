@@ -26,7 +26,7 @@ EMAIL_FROM=
 
 ## Supabase SQL
 
-Run this in the Supabase SQL editor:
+Run `supabase/migrations/20260509000000_smc_pdf_funnel.sql` in the Supabase SQL editor, or use the SQL below:
 
 ```sql
 create extension if not exists pgcrypto;
@@ -56,6 +56,12 @@ create table if not exists public.purchases (
 
 alter table public.leads enable row level security;
 alter table public.purchases enable row level security;
+
+insert into storage.buckets (id, name, public)
+values
+  ('smc-free-pdf', 'smc-free-pdf', false),
+  ('smc-paid-pdf', 'smc-paid-pdf', false)
+on conflict (id) do update set public = excluded.public;
 ```
 
 The app uses `SUPABASE_SERVICE_ROLE_KEY` only in server route handlers, so client-side RLS policies are not required for this funnel.
@@ -122,4 +128,3 @@ npm run dev
 ```
 
 Open `http://localhost:3000`.
-
