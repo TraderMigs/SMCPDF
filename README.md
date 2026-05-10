@@ -20,6 +20,8 @@ STRIPE_WEBHOOK_SECRET=
 STRIPE_PRICE_ID=
 RESEND_API_KEY=
 EMAIL_FROM=
+ADMIN_PASSWORD=
+ADMIN_SESSION_SECRET=
 ```
 
 `NEXT_PUBLIC_SITE_URL` should be the production URL, for example `https://yourdomain.com`.
@@ -98,6 +100,16 @@ stripe listen --forward-to localhost:3000/api/stripe-webhook
 2. Add `RESEND_API_KEY`.
 3. Set `EMAIL_FROM`, for example `SMC Guide <hello@yourdomain.com>`.
 
+## Admin Lead Export
+
+The private lead export lives at `/admin`. It is not linked from the public site.
+
+1. Set `ADMIN_PASSWORD` to the admin password you want to use.
+2. Set `ADMIN_SESSION_SECRET` to a long random string.
+3. Log in at `/admin`.
+4. Select rows or click `Select all`.
+5. Click `Download CSV` to export `email,source,created_at,free_pdf_sent,last_email_sent_at`.
+
 ## Vercel Deployment
 
 1. Push this repo to GitHub.
@@ -114,6 +126,7 @@ stripe listen --forward-to localhost:3000/api/stripe-webhook
 - Confirm `/free-success` shows the free download button.
 - Click the free download button and confirm a private Supabase signed URL opens.
 - Confirm the free PDF email arrives.
+- Log in at `/admin`, select leads, and download a CSV.
 - Click the paid checkout button and complete Stripe test checkout.
 - Confirm `/checkout/success?session_id=...` verifies the session before showing the paid download.
 - Confirm the Stripe webhook inserts a `purchases` row.
