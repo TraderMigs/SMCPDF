@@ -28,6 +28,29 @@ const faqs = [
   ["Will this guarantee profits?", "No. There are no guaranteed results in trading. You still have to study, practice, manage risk, and make your own decisions."],
 ];
 
+const previewCards = [
+  {
+    title: "What day trading really is",
+    image: "/smc-previews/lesson-1-day-trading.webp",
+    alt: "Preview page from the SMC Decoded guide showing lesson one about day trading",
+  },
+  {
+    title: "Liquidity sweeps",
+    image: "/smc-previews/lesson-8-liquidity-sweeps.webp",
+    alt: "Preview page from the SMC Decoded guide showing liquidity sweeps",
+  },
+  {
+    title: "Order blocks",
+    image: "/smc-previews/lesson-11-order-blocks.webp",
+    alt: "Preview page from the SMC Decoded guide showing order blocks",
+  },
+  {
+    title: "Fair value gaps",
+    image: "/smc-previews/lesson-12-fair-value-gaps.webp",
+    alt: "Preview page from the SMC Decoded guide showing fair value gaps",
+  },
+];
+
 export default async function Home({
   searchParams,
 }: {
@@ -90,21 +113,14 @@ export default async function Home({
       <section id="preview" className="relative border-y border-white/10 bg-white/[0.035] px-5 py-16">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-5 md:grid-cols-4">
-            {["Structure first", "Liquidity map", "Entry context", "Risk notes"].map((title) => (
-              <div key={title} className="glass rounded-xl p-4">
-                <div className="mb-5 h-32 overflow-hidden rounded-lg border border-white/10 bg-black/35 p-4 blur-[0.35px]">
-                  <div className="mb-4 h-3 w-24 rounded bg-[#d7ff61]/40" />
-                  <div className="space-y-2">
-                    <div className="h-2 rounded bg-white/20" />
-                    <div className="h-2 w-5/6 rounded bg-white/12" />
-                    <div className="h-2 w-2/3 rounded bg-white/12" />
-                  </div>
-                  <div className="mt-5 h-10 rounded border border-dashed border-white/15 bg-white/5" />
-                </div>
-                <p className="font-bold text-white">{title}</p>
-                <p className="mt-2 text-sm leading-6 text-white/58">
-                  A partial preview that shows the format without giving away the whole guide.
-                </p>
+            {previewCards.map((preview) => (
+              <div key={preview.title} className="glass rounded-xl p-3">
+                <img
+                  src={preview.image}
+                  alt={preview.alt}
+                  className="aspect-[1191/1684] w-full rounded-lg border border-white/10 object-cover shadow-xl"
+                />
+                <p className="mt-4 font-bold text-white">{preview.title}</p>
               </div>
             ))}
           </div>
