@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Smart Money Concepts Guide",
   description:
-    "Get a free beginner Smart Money Concepts PDF and upgrade to the full intermediate and advanced guide.",
+    "Get a free beginner Smart Money Concepts PDF in plain English.",
 };
 
 export default function RootLayout({

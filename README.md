@@ -22,9 +22,11 @@ RESEND_API_KEY=
 EMAIL_FROM=
 ADMIN_PASSWORD=
 ADMIN_SESSION_SECRET=
+NEXT_PUBLIC_PAID_OFFER_ENABLED=
 ```
 
 `NEXT_PUBLIC_SITE_URL` should be the production URL, for example `https://yourdomain.com`.
+Leave `NEXT_PUBLIC_PAID_OFFER_ENABLED` empty or set to `false` while the public site is freebie-only.
 
 ## Supabase SQL
 

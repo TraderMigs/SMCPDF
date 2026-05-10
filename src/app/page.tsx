@@ -103,7 +103,7 @@ export default async function Home({
                 </div>
                 <p className="font-bold text-white">{title}</p>
                 <p className="mt-2 text-sm leading-6 text-white/58">
-                  A partial preview that shows the format without exposing the full paid content.
+                  A partial preview that shows the format without giving away the whole guide.
                 </p>
               </div>
             ))}

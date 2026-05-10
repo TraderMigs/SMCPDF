@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CheckoutButton } from "@/components/CheckoutButton";
 import { Footer } from "@/components/Footer";
 
 export default function CheckoutCancelPage() {
@@ -9,9 +8,9 @@ export default function CheckoutCancelPage() {
         <div className="mx-auto max-w-2xl">
           <Link href="/" className="text-sm font-bold text-[#d7ff61]">SMC Guide</Link>
           <div className="glass mt-8 rounded-xl p-6 sm:p-8">
-            <h1 className="text-4xl font-black">Checkout canceled.</h1>
+            <h1 className="text-4xl font-black">This page is unavailable right now.</h1>
             <p className="mt-5 leading-8 text-white/70">
-              No problem. You can start with the free basic guide first, or try the full version checkout again when you are ready.
+              The current launch is focused on the free beginner guide. Start there and use it to build your foundation.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -20,7 +19,6 @@ export default function CheckoutCancelPage() {
               >
                 Get the free guide
               </Link>
-              <CheckoutButton label="Try checkout again" />
             </div>
           </div>
         </div>
@@ -29,4 +27,3 @@ export default function CheckoutCancelPage() {
     </main>
   );
 }
-

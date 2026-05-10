@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
 import { createPaidPdfSignedUrl } from "@/lib/downloads";
+import { isPaidOfferEnabled } from "@/lib/offer-flags";
 import { verifyPaidPurchase } from "@/lib/purchases";
 
 export async function GET(request: Request) {
   try {
+    if (!isPaidOfferEnabled()) {
+      return NextResponse.json({ error: "This download is not available yet." }, { status: 403 });
+    }
+
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get("session_id");
     const purchase = await verifyPaidPurchase(sessionId);
@@ -20,4 +25,3 @@ export async function GET(request: Request) {
     );
   }
 }
-

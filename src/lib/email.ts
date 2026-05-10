@@ -7,7 +7,6 @@ function fromAddress() {
 
 export async function sendFreePdfEmail(email: string, token: string) {
   const downloadUrl = `${getSiteUrl()}/api/free-download?token=${encodeURIComponent(token)}`;
-  const paidUrl = `${getSiteUrl()}/?email=${encodeURIComponent(email)}#advanced`;
 
   return getResend().emails.send({
     from: fromAddress(),
@@ -19,8 +18,7 @@ export async function sendFreePdfEmail(email: string, token: string) {
           <h1 style="margin-top:0">Your free Smart Money Concepts guide is ready</h1>
           <p>Thanks for starting with the foundation. This free guide is built to help you understand the basic structure before going deeper.</p>
           <p><a href="${downloadUrl}" style="display:inline-block;background:#d7ff61;color:#10130f;text-decoration:none;padding:14px 18px;border-radius:8px;font-weight:700">Download the free guide</a></p>
-          <p>If you are ready for the full intermediate/advanced version, it is available for $37 during this launch price.</p>
-          <p><a href="${paidUrl}" style="color:#d7ff61">View the full guide offer</a></p>
+          <p>This link is secure and expires. If you need a fresh copy later, enter your email on the site again and I will send a new download link.</p>
           <p style="font-size:13px;color:#a8b2bd">Educational content only. This is not financial advice, does not guarantee profits, and trading involves substantial risk. You are responsible for your own decisions.</p>
         </div>
       </div>
@@ -47,4 +45,3 @@ export async function sendPaidPdfEmail(email: string, sessionId: string) {
     `,
   });
 }
-

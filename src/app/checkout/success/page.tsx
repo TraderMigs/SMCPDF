@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowDownToLine, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import { isPaidOfferEnabled } from "@/lib/offer-flags";
 import { verifyPaidPurchase } from "@/lib/purchases";
 
 export default async function CheckoutSuccessPage({
@@ -9,7 +10,7 @@ export default async function CheckoutSuccessPage({
   searchParams: Promise<{ session_id?: string }>;
 }) {
   const params = await searchParams;
-  const purchase = await verifyPaidPurchase(params.session_id || null);
+  const purchase = isPaidOfferEnabled() ? await verifyPaidPurchase(params.session_id || null) : null;
 
   return (
     <main className="min-h-screen bg-background text-white">
@@ -19,25 +20,24 @@ export default async function CheckoutSuccessPage({
           <div className="glass mt-8 rounded-xl p-6 sm:p-8">
             <ShieldCheck className="mb-5 h-10 w-10 text-[#d7ff61]" />
             <h1 className="text-4xl font-black sm:text-5xl">
-              {purchase ? "Your full guide is ready." : "Payment verification needed."}
+              {purchase ? "Your download is ready." : "This page is unavailable right now."}
             </h1>
             {purchase ? (
               <>
                 <p className="mt-5 leading-8 text-white/70">
-                  Your Stripe payment was verified. Your paid copy was also emailed to you with a secure access link.
+                  Your access was verified. A secure link was also emailed to you.
                 </p>
                 <a
                   href={`/api/paid-download?session_id=${encodeURIComponent(purchase.sessionId)}`}
                   className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#d7ff61] px-5 py-3 text-sm font-bold text-[#10130f] transition hover:bg-[#ecff9d]"
                 >
-                  <ArrowDownToLine className="h-5 w-5" />
-                  Download Full PDF
+                  Download PDF
                 </a>
               </>
             ) : (
               <>
                 <p className="mt-5 leading-8 text-white/70">
-                  I could not verify a paid Stripe session from this link. If the charge succeeded, use the secure download link in your email or contact support with your checkout email.
+                  The current launch is focused on the free beginner guide. Return to the main page to get your copy.
                 </p>
                 <Link
                   href="/"
@@ -57,4 +57,3 @@ export default async function CheckoutSuccessPage({
     </main>
   );
 }
-
